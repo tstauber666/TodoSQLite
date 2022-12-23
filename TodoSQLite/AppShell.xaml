@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="TodoSQLite.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:views="clr-namespace:TodoSQLite.Views"
+    Shell.FlyoutBehavior="Disabled">
+    <TabBar>
+        <ShellContent
+            Title="Todo"
+            ContentTemplate="{DataTemplate views:TodoListPage}"
+            Route="TodoList" />
+
+        <ShellContent Title="DataGrid" ContentTemplate="{DataTemplate views:DataGridPage}" />
+        <ShellContent Title="TelerikDataGrid" ContentTemplate="{DataTemplate views:TelerikDataGrid}" />
+    </TabBar>
+
+
+</Shell>

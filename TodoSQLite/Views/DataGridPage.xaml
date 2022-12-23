@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    x:Class="TodoSQLite.Views.DataGridPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    
+    xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+    xmlns:models="clr-namespace:TodoSQLite.Models"
+    Title="DataGridPage">
+
+    <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+
+        </Grid.ColumnDefinitions>-->
+
+        <!--<Grid Padding="20" ColumnDefinitions="*, Auto">-->
+        <Grid Grid.Row="0" Margin="15,-5,0,0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                Text="Id" />
+            <Label
+                Grid.Column="1"
+                FontAttributes="Bold"
+                Text="Tnr  " />
+            <Label
+                Grid.Column="2"
+                FontAttributes="Bold"
+                Text="Enr" />
+            <Label
+                Grid.Column="3"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Start"
+                Text="Bnr" />
+            <Label
+                Grid.Column="5"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Start"
+                Text="Ba" />
+            <Label
+                Grid.Column="6"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Start"
+                Text="Bhd" />
+            <Label
+                Grid.Column="7"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Start"
+                Text="Höhe" />
+        </Grid>
+
+
+
+
+        <!--  SelectionChanged="CollectionView_SelectionChanged"  -->
+        <CollectionView
+            x:Name="BaumDaten"
+            Margin="15"
+            ItemsSource="{Binding Items}"
+            SelectedItem="{Binding SelectedItems}"
+            SelectionChanged="CollectionView_SelectionChanged"
+            SelectionMode="Single"
+            VerticalOptions="StartAndExpand">
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate x:Name="BaumDatenTemplate" x:DataType="models:AaaTestBaeume">
+                    <Grid x:Name="BaumDatenElemente" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.1*" />
+                            <ColumnDefinition Width="0.1*" />
+
+                        </Grid.ColumnDefinitions>
+
+                        <Label
+                            Grid.Column="0"
+                            Margin="10,0,0,0"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Id}" />
+                        <Entry
+                            Grid.Column="1"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Tnr}" />
+                        <Entry
+                            Grid.Column="2"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Enr}" />
+                        <Entry
+                            Grid.Column="3"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Bnr}" />
+
+                        <!--<Picker
+                            x:Name="baumartpicker1"
+                            Grid.Column="4"
+                            ItemDisplayBinding="{Binding LangD}"
+                            ItemsSource="{Binding BaumListe}"
+                            SelectedIndexChanged="baumartpicker1_SelectedIndexChanged"/>-->
+
+                        <Entry
+                            x:Name="baumartentry"
+                            Grid.Column="5"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Ba}"
+                            TextChanged="Entry_TextChanged" />
+
+                        <!--  Text="{Binding Ba}" />  -->
+                        <!--  Text="{Binding Source={x:Reference baumartpicker1}, Path=SelectedItem.Icode}"  -->
+                        <Entry
+                            Grid.Column="6"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Bhd}" />
+                        <Entry
+                            Grid.Column="7"
+                            HorizontalTextAlignment="Start"
+                            Text="{Binding Hoehe}" />
+
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        <!--  {Binding BaumArtList}  -->
+
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="20"
+                Clicked="OnItemsAdd"
+                Text="Add New Item" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="20"
+                Clicked="OnItemsSave"
+                Text="Sichern" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="20"
+                Clicked="OnItemDelete"
+                Text="Löschen" />
+
+            <!--  SelectedItem="{Binding Icode}"  -->
+
+
+            <Picker
+                x:Name="baumartpicker"
+                Title="Baumart"
+                Grid.Column="3"
+                ItemDisplayBinding="{Binding LangD}"
+                ItemsSource="{Binding BaumArtList}" />
+            <Label
+                x:Name="baumartid"
+                Grid.Column="4"
+                Text="{Binding Source={x:Reference baumartpicker}, Path=SelectedItem.Icode}" />
+
+        </Grid>
+        
+       
+
+    </Grid>
+</ContentPage>

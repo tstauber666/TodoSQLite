@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             x:Class="TodoSQLite.Views.TelerikDataGrid"
+             Title="TelerikDataGrid">
+    <VerticalStackLayout>
+        <telerik:RadDataGrid x:Name="dataGrid" AutoGenerateColumns="False" SelectionChanged="dataGrid_SelectionChanged">
+            <telerik:RadDataGrid.Columns>
+                <telerik:DataGridNumericalColumn  PropertyName="Id" 
+                                  HeaderText="Id"/>
+                <telerik:DataGridNumericalColumn  PropertyName="Tnr" 
+                                  HeaderText="Tnr"/>
+                <telerik:DataGridNumericalColumn  PropertyName="Enr" 
+                                  HeaderText="Enr"/>
+                <telerik:DataGridNumericalColumn  PropertyName="Bnr" 
+                                  HeaderText="Bnr"/>
+                <!--<telerik:DataGridNumericalColumn  PropertyName="Ba" 
+                                  HeaderText="Ba"/>-->
+                <telerik:DataGridNumericalColumn  PropertyName="Bhd" 
+                                  HeaderText="Bhd"/>
+                <telerik:DataGridNumericalColumn  PropertyName="Hoehe" 
+                                  HeaderText="Höhe"/>
+
+                <telerik:DataGridComboBoxColumn PropertyName="Ba"
+                                HeaderText="Ba"
+                                CellContentFormat="Picked: {0}"
+                                ItemsSourcePath="BaumArtList">
+                    <telerik:DataGridComboBoxColumn.CellContentStyle>
+                        <telerik:DataGridTextCellStyle SelectedTextColor="DarkGreen"
+                                       TextColor="Black"
+                                       FontSize="15" />
+                    </telerik:DataGridComboBoxColumn.CellContentStyle>
+                    <telerik:DataGridColumn.CellContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <VerticalStackLayout InputTransparent="True">
+                                    <Grid BackgroundColor="Orange"
+                          Margin="0, 10, 0, 0">
+                                        <Label Text="{Binding Ba}"
+                               Margin="0, 5, 0, 5"
+                               HorizontalOptions="Center"
+                               VerticalTextAlignment="Center" />
+                                    </Grid>
+                                    <Label Text="Some Custom Text"
+                           TextColor="DarkGreen"
+                           FontSize="10" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </telerik:DataGridColumn.CellContentTemplate>
+                    <telerik:DataGridColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox x:Name="ComboBox1" ItemsSource="{Binding BaumArtList}" 
+                             DisplayMemberPath="Icode" 
+                            AutomationId="boundComboBox"/>
+                            <!--<telerik:RadComboBox x:Name="comboBox">
+                                <telerik:RadComboBox.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>Item 1</x:String>
+                                        <x:String>Item 2</x:String>
+                                        <x:String>Item 3</x:String>
+                                        <x:String>Item 4</x:String>
+                                        <x:String>Item 5</x:String>
+                                        <x:String>Item 6</x:String>
+                                        <x:String>Item 7</x:String>
+                                        <x:String>Item 8</x:String>
+                                    </x:Array>
+                                </telerik:RadComboBox.ItemsSource>
+                            </telerik:RadComboBox>-->
+                            <!-- add the control here for example: <Picker/> <telerik:RadComboBox/>-->
+                        </DataTemplate>
+                    </telerik:DataGridColumn.CellEditTemplate>
+                </telerik:DataGridComboBoxColumn>
+
+            </telerik:RadDataGrid.Columns>
+        </telerik:RadDataGrid>
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="0.1*" />
+
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="20"
+                Clicked="OnItemsAdd"
+                Text="Add New Item" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="20"
+                Clicked="OnItemsSave"
+                Text="Sichern" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="20"
+                Clicked="OnItemDelete"
+                Text="Löschen" />
+            <telerik:RadComboBox x:Name="ComboBox2" ItemsSource="{Binding BaumArtList}" 
+                     DisplayMemberPath="Icode"
+                     AutomationId="boundComboBox"
+                     Grid.Column="3"/>
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>
